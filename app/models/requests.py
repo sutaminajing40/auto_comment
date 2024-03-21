@@ -1,18 +1,6 @@
-from api import api
-from flask_restx import fields, reqparse
+from flask_restx import reqparse
 
-# リクエストデータの解析用パーサーを設定
-parser = reqparse.RequestParser()
-parser.add_argument(
-    'task_id', type=str, required=True, help='Task ID cannot be blank')
-parser.add_argument(
+# commentsのPOSTリクエストの型を定義
+comments_post_requests = reqparse.RequestParser()
+comments_post_requests.add_argument(
     'content', type=str, required=True, help='Content cannot be blank')
-
-
-# レスポンスデータのフィールドを設定
-model = api.model('CommentModel', {
-    'id': fields.Integer,
-    'task_id': fields.String,
-    'content': fields.String,
-    'created_at': fields.DateTime
-})
